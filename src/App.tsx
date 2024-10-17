@@ -19,7 +19,8 @@ function App() {
     const fetchRecipes = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL;
-        const response = await axios.get<Recipe[]>(`https://${apiUrl}/recipes`);
+        console.log(apiUrl);
+        const response = await axios.get<Recipe[]>(`${apiUrl}/recipes`);
         setRecipes(response.data);
       } catch (error) {
         console.error('Error fetching recipes:', error);
