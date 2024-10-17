@@ -1,53 +1,16 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import './App.css';
+import RecipeList from './components/RecipeList'
 
-interface Recipe {
-  id: string;
-  title: string;
-  ingredients: string;
-  instructions: string;
-  cookingTime: number;
-  servings: number;
-  createdAt: string;
-}
-
-function App() {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        const apiUrl = import.meta.env.VITE_API_URL;
-        console.log(apiUrl);
-        const response = await axios.get<Recipe[]>(`${apiUrl}/recipes`);
-        setRecipes(response.data);
-      } catch (error) {
-        console.error('Error fetching recipes:', error);
-      }
-    };
-
-    fetchRecipes();
-  }, []);
-
+export default function App() {
   return (
-    <div className="App">
-      <h1>Husmansbanken Recipes</h1>
-      <div className="recipe-list">
-        {recipes.map((recipe) => (
-          <div key={recipe.id} className="recipe">
-            <h2>{recipe.title}</h2>
-            <p><strong>Ingredients:</strong> {recipe.ingredients}</p>
-            <p><strong>Instructions:</strong> {recipe.instructions}</p>
-            <div className="recipe-meta">
-              <span><strong>Cooking Time:</strong> {recipe.cookingTime} minutes</span>
-              <span><strong>Servings:</strong> {recipe.servings}</span>
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-white shadow">
+        <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold text-gray-900">Husmansbanken Recipes</h1>
+        </div>
+      </header>
+      <main>
+        <RecipeList />
+      </main>
     </div>
-  );
+  )
 }
-
-export default App;
