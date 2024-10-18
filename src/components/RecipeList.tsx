@@ -24,7 +24,7 @@ export default function RecipeList() {
       setIsLoading(true)
       setError(null)
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL
+        const apiUrl = import.meta.env.VITE_API_URL
         const response = await axios.get<Recipe[]>(`${apiUrl}/recipes`)
         setRecipes(response.data)
       } catch (error) {
